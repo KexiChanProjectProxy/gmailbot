@@ -1,0 +1,16 @@
+services:
+  gmailbot:
+    build: .
+    image: ghcr.io/kexichanprojectproxy/gmailbot:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/data
+      - ./config.yaml:/config.yaml:ro
+    command: ["-config", "/config.yaml"]
+    # For sync.mode=pubsub, mount a service account key and point to it:
+    # environment:
+    #   GOOGLE_APPLICATION_CREDENTIALS: /secrets/pubsub.json
+    # volumes:
+    #   - ./pubsub.json:/secrets/pubsub.json:ro

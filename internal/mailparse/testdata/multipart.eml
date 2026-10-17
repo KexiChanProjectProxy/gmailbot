@@ -1,0 +1,28 @@
+From: Carol <carol@example.org>
+To: bob@example.com, Dan <dan@example.com>
+Cc: eve@example.com
+Subject: Report
+Date: Tue, 13 Oct 2026 08:00:00 +0200
+Message-ID: <rep-1@example.org>
+In-Reply-To: <prev@example.org>
+References: <root@example.org> <prev@example.org>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="XX"
+
+--XX
+Content-Type: text/plain; charset=utf-8
+
+See attached.
+--XX
+Content-Type: application/pdf; name="report.pdf"
+Content-Disposition: attachment; filename="report.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKJcfsj6IK
+--XX
+Content-Type: text/csv; name="data.csv"
+Content-Disposition: attachment; filename="data.csv"
+
+a,b
+1,2
+--XX--

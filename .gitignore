@@ -1,0 +1,7 @@
+/gmailbot
+/dist/
+/data/
+config.yaml
+*.db
+*.db-shm
+*.db-wal

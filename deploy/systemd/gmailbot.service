@@ -1,0 +1,23 @@
+[Unit]
+Description=gmailbot - Gmail in Telegram
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gmailbot
+Group=gmailbot
+WorkingDirectory=/var/lib/gmailbot
+ExecStart=/usr/local/bin/gmailbot -config /etc/gmailbot/config.yaml
+Restart=on-failure
+RestartSec=5
+# EnvironmentFile=-/etc/gmailbot/env   # e.g. GMAILBOT_TELEGRAM_TOKEN=..., GOOGLE_APPLICATION_CREDENTIALS=...
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/gmailbot
+
+[Install]
+WantedBy=multi-user.target

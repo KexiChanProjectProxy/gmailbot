@@ -1,0 +1,39 @@
+# gmailbot configuration. Every key can be overridden with an environment variable
+# named GMAILBOT_<SECTION>_<KEY>, e.g. GMAILBOT_TELEGRAM_TOKEN or GMAILBOT_SYNC_MODE.
+
+telegram:
+  token: ""                 # from @BotFather
+  allowed_user_ids: []      # Telegram user ids allowed to use the bot; empty = anyone
+  # api_url: ""             # optional self-hosted Bot API server
+
+google:
+  client_id: ""             # OAuth client (type "Web application") from Google Cloud console
+  client_secret: ""
+
+oauth:
+  listen_addr: ":8080"
+  public_url: "http://localhost:8080"   # redirect URI registered with Google = public_url + /oauth/callback
+
+db:
+  path: "./data/gmailbot.db"
+  encryption_key: ""        # base64 of 32 random bytes (openssl rand -base64 32); strongly recommended
+
+sync:
+  mode: "poll"              # poll | pubsub
+  poll_interval: "60s"      # poll mode interval
+  fallback_poll_interval: "15m"  # safety net in pubsub mode
+  workers: 4
+  max_body_chars: 3500      # longer bodies are truncated in chat; full text available as .txt
+  max_attachment_mb: 20     # Telegram bots can download/upload files up to 20 MB
+  cache_ttl: "168h"         # cached mail is deleted after 7 days (replies need the cache)
+  dedup: true               # show mail received by several of your accounts only once
+  dedup_actions_all_copies: true  # archive/delete/spam also applies to the hidden copies
+
+pubsub:                     # only for sync.mode = pubsub
+  project_id: ""
+  topic: ""                 # full name: projects/<project>/topics/<topic>
+  subscription: ""          # pull subscription id on that topic
+
+log:
+  level: "info"             # debug | info | warn | error
+  format: "text"            # text | json
