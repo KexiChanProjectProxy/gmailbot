@@ -133,7 +133,7 @@ func Render(in Input) (string, *models.InlineKeyboardMarkup) {
 		if n > 1 {
 			label = "attachments"
 		}
-		foot.WriteString(fmt.Sprintf("\n\n📎 %d %s: %s", n, label, e(mailparse.Truncate(strings.Join(names, ", "), 200))))
+		fmt.Fprintf(&foot, "\n\n📎 %d %s: %s", n, label, e(mailparse.Truncate(strings.Join(names, ", "), 200)))
 	}
 	if st, ok := statusLabel[m.Status]; ok {
 		foot.WriteString("\n\n<i>" + st + "</i>")

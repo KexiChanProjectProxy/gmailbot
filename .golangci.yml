@@ -1,0 +1,20 @@
+version: "2"
+
+linters:
+  settings:
+    errcheck:
+      # Deferred cleanup and best-effort writes to an HTTP client; failures here are not actionable.
+      exclude-functions:
+        - (io.Closer).Close
+        - (*database/sql.DB).Close
+        - (*database/sql.Rows).Close
+        - (*database/sql.Tx).Rollback
+        - (*cloud.google.com/go/pubsub/v2.Client).Close
+        - (*github.com/kexiChanProjectProxy/gmailbot/internal/store.Store).Close
+        - (net/http.ResponseWriter).Write
+        - (*net/http.Server).Shutdown
+        - (*html/template.Template).Execute
+  exclusions:
+    rules:
+      - path: _test\.go
+        linters: [errcheck]

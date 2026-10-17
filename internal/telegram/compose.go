@@ -116,7 +116,7 @@ func (a *App) showWizard(ctx context.Context, uid, chatID int64, d *draft) error
 	}
 	if d.Mode == "forward" {
 		if src, err := a.Store.GetMessage(ctx, d.SrcMsgID); err == nil && len(src.Attachments) > 0 {
-			sb.WriteString(fmt.Sprintf("<b>Original attachments:</b> %d\n", len(src.Attachments)))
+			fmt.Fprintf(&sb, "<b>Original attachments:</b> %d\n", len(src.Attachments))
 		}
 		sb.WriteString("\n" + or(mailparse.Truncate(d.Body, 1500), "(no note)") + "\n\n")
 	} else {
